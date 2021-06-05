@@ -106,7 +106,7 @@ if (now.hour >= 9 and now.minute >= 10) and (now.hour <= 3 and now.minute <= 40)
                                                    'CIOI VOLUME',
                                                    'VOLUME'])
 
-        st.title("NSE Options Strategy (Expiry : {})".format(expiry_date))
+        st.subheader("Expiry : {})".format(expiry_date))
         st.subheader("Data Updated at {}".format(timestamp))
         st.table(table_df)
 
@@ -115,3 +115,7 @@ if (now.hour >= 9 and now.minute >= 10) and (now.hour <= 3 and now.minute <= 40)
             "Some error occured while fetching the data. Please try refreshing after 10 seconds")
 
     sleep(60)
+
+else:
+    st.title("NSE Options Strategy")
+    st.subheader("App will display the data only from 9:10 AM to 3:40 PM")
