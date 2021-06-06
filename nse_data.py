@@ -28,7 +28,7 @@ import streamlit as st
 IST = pytz.timezone('Asia/Kolkata')
 current_time = datetime.now(IST).time()
 begin_time = time(9, 10)
-end_time = time(16, 40)
+end_time = time(21, 40)
 
 if current_time >= begin_time and current_time <= end_time:
 
