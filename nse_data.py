@@ -32,11 +32,14 @@ end_time = time(16, 40)
 
 if current_time >= begin_time and current_time <= end_time:
 
-    nse_data = None
     nse_url = 'https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY'
     headers = {'User-Agent': 'Mozilla/5.0'}
     page = requests.get(nse_url, headers=headers)
-    nse_data = json.loads(page.text)
+
+    try:
+        nse_data = json.loads(page.text)
+    except:
+        nse_data = None
 
     if nse_data:
 
