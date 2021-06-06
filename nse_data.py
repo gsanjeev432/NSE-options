@@ -30,13 +30,17 @@ end_time = time(21, 40)
 
 if current_time >= begin_time and current_time <= end_time:
 
+    st.info("1")
+
     try:
         nse_data = nsefetch(
             'https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY')
+        st.info("Got data")
     except:
         nse_data = None
 
     if nse_data:
+        st.info("Processing")
 
         expiry_date = nse_data['records']['expiryDates'][0]
 
