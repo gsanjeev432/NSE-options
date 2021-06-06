@@ -4,6 +4,7 @@ from datetime import datetime, time
 from time import sleep
 
 import pandas as pd
+import pytz
 import requests
 import streamlit as st
 
@@ -24,7 +25,8 @@ import streamlit as st
 #             retry += 1
 #     return None
 
-current_time = datetime.now().time()
+IST = pytz.timezone('Asia/Kolkata')
+current_time = datetime.now(IST).time()
 begin_time = time(9, 10)
 end_time = time(15, 40)
 
