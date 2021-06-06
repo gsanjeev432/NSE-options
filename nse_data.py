@@ -114,12 +114,15 @@ if current_time >= begin_time and current_time <= end_time:
         st.subheader("Data Updated at {}".format(timestamp))
         st.table(table_df)
 
+        sleep(60)
+
     else:
         st.error(
-            "Some error occured while fetching the data. Please try refreshing after 10 seconds")
-
-    sleep(60)
+            "Some error occured while fetching the data. Refreshing in 10 seconds")
+        sleep(30)
 
 else:
     st.title("NSE Options Strategy")
     st.subheader("App will display the data only from 9:10 AM to 3:40 PM")
+
+st.experimental_rerun()
