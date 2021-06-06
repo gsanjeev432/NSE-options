@@ -118,7 +118,7 @@ if current_time >= begin_time and current_time <= end_time:
 
     else:
         st.error(
-            "Some error occured while fetching the data. Refreshing in 30 seconds")
+            "Some error occured while fetching the data. Refreshing in 30 seconds...")
         sleep(30)
 
     st.experimental_rerun()
