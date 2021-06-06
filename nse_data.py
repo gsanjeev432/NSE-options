@@ -1,12 +1,10 @@
-
-import json
 from datetime import datetime, time
 from time import sleep
 
 import pandas as pd
 import pytz
-import requests
 import streamlit as st
+from nsepython import nsefetch
 
 # def get_nse_data():
 #     max_retries = 3
@@ -28,16 +26,13 @@ import streamlit as st
 IST = pytz.timezone('Asia/Kolkata')
 current_time = datetime.now(IST).time()
 begin_time = time(9, 10)
-end_time = time(20, 40)
+end_time = time(21, 40)
 
 if current_time >= begin_time and current_time <= end_time:
 
-    nse_url = 'https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY'
-    headers = {'User-Agent': 'Mozilla/5.0'}
-    page = requests.get(nse_url, headers=headers)
-
     try:
-        nse_data = json.loads(page.text)
+        nse_data = nsefetch(
+            'https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY')
     except:
         nse_data = None
 
@@ -126,4 +121,3 @@ if current_time >= begin_time and current_time <= end_time:
 else:
     st.title("NSE Options Strategy")
     st.subheader("App will display the data only from 9:10 AM to 3:40 PM")
-
