@@ -116,7 +116,7 @@ if current_time >= begin_time and current_time <= end_time:
             "Some error occured while fetching the data. Refreshing in 30 seconds...")
         sleep(30)
 
-    st.experimental_rerun()
+    # st.experimental_rerun()
 
 else:
     st.title("NSE Options Strategy")
