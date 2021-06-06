@@ -32,14 +32,20 @@ end_time = time(15, 40)
 
 if current_time >= begin_time and current_time <= end_time:
 
-    nse_url = 'https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY'
-    headers = {'User-Agent': 'Mozilla/5.0'}
-    page = requests.get(nse_url, headers=headers)
+    max_retries = 3
+    retry = 0
+    nse_data = None
 
-    try:
-        nse_data = json.loads(page.text)
-    except:
-        nse_data = None
+    while retry < max_retries and not nse_data:
+        try:
+            nse_url = 'https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY'
+            headers = {'User-Agent': 'Mozilla/5.0'}
+            page = requests.get(nse_url,headers=headers)
+            nse_data = json.loads(page.text)
+        except:
+            st.warning("Retrying, please wait")
+            sleep(15)
+            retry += 1
 
     if nse_data:
 
@@ -118,7 +124,7 @@ if current_time >= begin_time and current_time <= end_time:
 
     else:
         st.error(
-            "Some error occured while fetching the data. Refreshing in 10 seconds")
+            "Some error occured while fetching the data. Refreshing in 30 seconds")
         sleep(30)
 
 else:
