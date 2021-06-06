@@ -1,6 +1,6 @@
 
 import json
-from datetime import datetime
+from datetime import datetime, time
 from time import sleep
 
 import pandas as pd
@@ -24,9 +24,11 @@ import streamlit as st
 #             retry += 1
 #     return None
 
-now = datetime.now()
+current_time = datetime.now().time()
+begin_time = time(9, 10)
+end_time = time(15, 40)
 
-if (now.hour >= 9 and now.minute >= 10) and (now.hour <= 3 and now.minute <= 40):
+if current_time >= begin_time and current_time <= end_time:
 
     nse_url = 'https://www.nseindia.com/api/option-chain-indices?symbol=NIFTY'
     headers = {'User-Agent': 'Mozilla/5.0'}
@@ -106,7 +108,7 @@ if (now.hour >= 9 and now.minute >= 10) and (now.hour <= 3 and now.minute <= 40)
                                                    'CIOI VOLUME',
                                                    'VOLUME'])
 
-        st.subheader("Expiry : {})".format(expiry_date))
+        st.subheader("Expiry : {}".format(expiry_date))
         st.subheader("Data Updated at {}".format(timestamp))
         st.table(table_df)
 
