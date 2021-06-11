@@ -35,9 +35,9 @@ while True:
                 'https://www.nseindia.com/api/option-chain-indices?symbol=BANKNIFTY')
         except:
             nifty_data = None
-            nifty_data = None
+            banknifty_data = None
 
-        if nifty_data and nifty_data:
+        if nifty_data and banknifty_data:
 
             expiry_date = nifty_data['records']['expiryDates'][0]
 
@@ -57,7 +57,7 @@ while True:
             PE_VOLUME = PE_df["totalTradedVolume"][pe_max_index_change_oi]
 
             ce_values = [data['CE'] for data in nifty_data['records']['data']
-                         if 'CE' in data and data['CE']['expiryDate'] == "10-Jun-2021"]
+                         if 'CE' in data and data['CE']['expiryDate'] == expiry_date]
             CE_df = pd.DataFrame(ce_values).sort_values(['strikePrice'])
 
             ce_max_index_oi = CE_df["openInterest"].idxmax()
@@ -109,11 +109,11 @@ while True:
 
             # Bank Nifty
 
-            pe_values = [data['PE'] for data in nifty_data['records']['data']
+            pe_values = [data['PE'] for data in banknifty_data['records']['data']
                          if 'PE' in data and data['PE']['expiryDate'] == expiry_date]
             PE_df = pd.DataFrame(pe_values).sort_values(['strikePrice'])
 
-            timestamp = nifty_data['records']['timestamp']
+            timestamp = banknifty_data['records']['timestamp']
 
             pe_max_index_oi = PE_df["openInterest"].idxmax()
             PE_MAX_OI = PE_df["strikePrice"][pe_max_index_oi]
@@ -124,8 +124,8 @@ while True:
             PE_CIOI_VOL = PE_df["changeinOpenInterest"][pe_max_index_change_oi]
             PE_VOLUME = PE_df["totalTradedVolume"][pe_max_index_change_oi]
 
-            ce_values = [data['CE'] for data in nifty_data['records']['data']
-                         if 'CE' in data and data['CE']['expiryDate'] == "10-Jun-2021"]
+            ce_values = [data['CE'] for data in banknifty_data['records']['data']
+                         if 'CE' in data and data['CE']['expiryDate'] == expiry_date]
             CE_df = pd.DataFrame(ce_values).sort_values(['strikePrice'])
 
             ce_max_index_oi = CE_df["openInterest"].idxmax()
